@@ -1,0 +1,343 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: #F0F8FF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+header {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo-container {
+    display: flex;
+    gap: 34.5px;
+}
+
+.logo {
+    height: 40px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.link-container a {
+    color: #F0F8FF;
+    text-decoration: none;
+    font-size: 1.2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.link-container .separator {
+    margin: 0 10px;
+    color: #F0F8FF;
+    font-size: 1.2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.center-rectangle {
+    position: relative;
+    background: #93BBBC;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    width: 500px;
+    max-width: 90%;
+    color: #F0F8FF;
+    animation: slideIn 1s ease-in-out;
+}
+
+.question-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.center-rectangle h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.icon {
+    height: 20px;
+    margin-right: 10px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.text {
+    font-size: 1.3rem;
+    margin-right: auto;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.price-line {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.price {
+    font-size: 1.2rem;
+    margin-right: 5px;
+    text-align: right;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.label {
+    font-size: 1rem;
+    text-align: right;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.link_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link_wrapper a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #666;
+    text-align: center;
+    color: #F0F8FF;
+    letter-spacing: 1px;
+    border: 3px solid #666;
+    border-radius: 12px;
+    transition: background-color 0.2s, color 0.2s;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.link_wrapper a:hover {
+    background-color: #708090;
+}
+
+.link_wrapper a:active {
+    background-color: #62b499;
+    color: #F0F8FF;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+    color: #F0F8FF;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    position: relative;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-text {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.footer-text p {
+    color: #F0F8FF;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.footer-text p a {
+    color: #93BBBC;
+    text-decoration: none;
+    margin-left: 5px;
+    display: inline-block;
+    font-size: 12px;
+    text-transform: none;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .center-rectangle {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .center-rectangle h2,
+    .line,
+    .text,
+    .price,
+    .label {
+        font-size: 105%;
+    }
+
+    .line {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .text {
+        font-size: 1.0rem;
+        margin-right: auto;
+    }
+
+    .price-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .price-line {
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    .price {
+        font-size: 1.0rem;
+        color: #F0F8FF;
+        margin-right: 5px;
+        text-align: right;
+    }
+
+    .link_wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+    .link_wrapper a {
+        width: 60px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 10px;
+        font-size: 80%;
+    }
+
+    .logo {
+        height: 30px;
+    }
+
+    .link-container a,
+    .link-container .separator {
+        font-size: 0.9rem;
+    }
+}
