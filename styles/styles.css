@@ -1,3 +1,4 @@
+/* Global styles */
 * {
     box-sizing: border-box;
 }
@@ -6,16 +7,20 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
-    color: #F0F8FF;
+    background-color: #222425;
+    /* Background color */
+    color: #FDF6E0;
+    /* Main text color */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    /* Prevent scrollbars */
 }
 
+/* Animation keyframes */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -38,6 +43,7 @@ body {
     }
 }
 
+/* Header styles */
 header {
     position: absolute;
     top: 10px;
@@ -46,10 +52,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Logo container */
 .logo-container {
     display: flex;
     gap: 34.5px;
@@ -60,6 +67,7 @@ header {
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Navigation links */
 .link-container {
     display: flex;
     align-items: center;
@@ -67,7 +75,8 @@ header {
 }
 
 .link-container a {
-    color: #F0F8FF;
+    color: #93BBBC;
+    /* Secondary text color */
     text-decoration: none;
     font-size: 1.2rem;
     animation: fadeIn 1s ease-in-out;
@@ -75,47 +84,71 @@ header {
 
 .link-container .separator {
     margin: 0 10px;
-    color: #F0F8FF;
+    color: #93BBBC;
+    /* Secondary text color */
     font-size: 1.2rem;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Main heading */
+.main-heading {
+    text-align: center;
+    margin-bottom: 50px;
+    /* Space above the rectangle */
+    color: #FDF6E0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Main content styles */
 .center-rectangle {
     position: relative;
     background: #93BBBC;
+    /* Background color for rectangle */
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: left;
     width: 500px;
     max-width: 90%;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: slideIn 1s ease-in-out;
 }
 
+/* Icons container */
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.update-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    animation: fadeIn 1s ease-in-out;
+}
+
 .question-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     width: 20px;
     height: 20px;
     cursor: pointer;
     animation: fadeIn 1s ease-in-out;
 }
 
-.center-rectangle h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #F0F8FF;
-    animation: fadeIn 1s ease-in-out;
-}
-
+/* Individual line styles */
 .line {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 10px 0;
-    color: #F0F8FF;
+    padding: 15px;
+    background-color: #222425;
+    /* New background color for each line */
+    border-radius: 10px;
+    /* Rounded corners */
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -128,16 +161,17 @@ header {
 .text {
     font-size: 1.3rem;
     margin-right: auto;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Pricing and labels */
 .price-container {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     margin-right: 10px;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -146,7 +180,7 @@ header {
     align-items: center;
     justify-content: flex-end;
     margin-bottom: 5px;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -154,17 +188,18 @@ header {
     font-size: 1.2rem;
     margin-right: 5px;
     text-align: right;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
 .label {
     font-size: 1rem;
     text-align: right;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Button styles */
 .link_wrapper {
     display: flex;
     align-items: center;
@@ -179,33 +214,38 @@ header {
     height: 50px;
     font-weight: bold;
     text-decoration: none;
-    background: #666;
+    background: #93BBBC;
+    /* Button background color */
     text-align: center;
-    color: #F0F8FF;
+    color: #fdf6e0;
+    /* Button text color */
     letter-spacing: 1px;
-    border: 3px solid #666;
+    border: 3px solid #fdf6e0;
+    /* Match button border color */
     border-radius: 12px;
     transition: background-color 0.2s, color 0.2s;
     animation: fadeIn 1s ease-in-out;
 }
 
 .link_wrapper a:hover {
-    background-color: #708090;
+    background-color: #222425;
 }
 
 .link_wrapper a:active {
-    background-color: #62b499;
-    color: #F0F8FF;
+    background-color: #93BBBC;
+    color: #FDF6E0;
 }
 
+/* Separators */
 hr {
     border: none;
     border-top: 1px solid #eee;
     margin: 15px 0;
-    color: #F0F8FF;
+    color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -244,6 +284,7 @@ hr {
     cursor: pointer;
 }
 
+/* Footer text styles */
 .footer-text {
     position: absolute;
     bottom: 10px;
@@ -256,7 +297,7 @@ hr {
 }
 
 .footer-text p {
-    color: #F0F8FF;
+    color: #FDF6E0;
     margin: 0;
     white-space: nowrap;
     display: flex;
@@ -275,6 +316,7 @@ hr {
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Responsive styles */
 @media (max-width: 600px) {
     .center-rectangle {
         width: 90%;
@@ -282,11 +324,18 @@ hr {
     }
 
     .center-rectangle h2,
+    .main-heading,
     .line,
     .text,
     .price,
     .label {
         font-size: 105%;
+    }
+
+    .main-heading {
+        font-size: 1.2rem;
+        margin-bottom: 50px;
+        text-align: center;
     }
 
     .line {
@@ -313,7 +362,7 @@ hr {
 
     .price {
         font-size: 1.0rem;
-        color: #F0F8FF;
+        color: #FDF6E0;
         margin-right: 5px;
         text-align: right;
     }
