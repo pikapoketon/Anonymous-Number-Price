@@ -1,11 +1,12 @@
 // Initialize previous data state
 let previousData = null;
 
-// Function to fetch and update prices
 async function fetchPrices() {
     try {
-        
-        const response = await fetch('https://pikapoketon.loca.lt/api/data');
+        const response = await fetch(
+            'https://api.allorigins.win/get?url=' +
+            encodeURIComponent('http://92.118.8.202:8888/api/data')
+        );
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
