@@ -4,7 +4,7 @@ let previousData = null;
 // Function to fetch and update prices
 async function fetchPrices() {
     try {
-        // Fetch data using AllOrigins to bypass CORS restrictions
+        
         const response = await fetch('https://pikapoketon.loca.lt/api/data');
 
         if (!response.ok) {
