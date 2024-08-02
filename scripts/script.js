@@ -4,7 +4,7 @@ async function fetchPrices() {
         // Fetch data using AllOrigins to bypass CORS restrictions
         const response = await fetch(
             'https://api.allorigins.win/get?url=' +
-            encodeURIComponent('https://pikapoketon.loca.lt//api/data')
+            encodeURIComponent('https://pikapoketon.loca.lt/api/data')
         );
 
         if (!response.ok) {
