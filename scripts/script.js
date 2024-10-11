@@ -1,6 +1,19 @@
 // Initialize previous data state
 let previousData = null;
 
+// Function to display "Loading..." initially
+function showLoading() {
+    document.getElementById('shardify-ton').textContent = 'Loading...';
+    document.getElementById('shardify-usd').textContent = 'Loading...';
+    document.getElementById('getgems-ton').textContent = 'Loading...';
+    document.getElementById('getgems-usd').textContent = 'Loading...';
+    document.getElementById('fragment-ton').textContent = 'Loading...';
+    document.getElementById('fragment-usd').textContent = 'Loading...';
+}
+
+// Call showLoading on page load
+showLoading();
+
 async function fetchPrices() {
     try {
         const response = await fetch(
@@ -15,7 +28,7 @@ async function fetchPrices() {
         const { contents } = await response.json();
         const data = JSON.parse(contents);
 
-        // Compare previous data with new data and apply animation if changed
+        // Check if data fields are available and apply animations only if values changed
         if (previousData) {
             if (previousData.price_8num_ton !== data.price_8num_ton) {
                 animateChange(document.getElementById('shardify-line'));
@@ -28,20 +41,35 @@ async function fetchPrices() {
             }
         }
 
-        // Update price elements with fetched data
-        document.getElementById('shardify-ton').textContent = `${parseFloat(data.price_8num_ton).toFixed(2)} TON`;
-        document.getElementById('shardify-usd').textContent = `${parseFloat(data.price_8num_USDT).toFixed(2)} USD`;
-        document.getElementById('getgems-ton').textContent = `${parseFloat(data.price_getgems_ton).toFixed(2)} TON`;
-        document.getElementById('getgems-usd').textContent = `${parseFloat(data.price_getgems_USDT).toFixed(2)} USD`;
+        // Update price elements only if the fields are present
+        if (data.price_8num_ton != null) {
+            document.getElementById('shardify-ton').textContent = `${parseFloat(data.price_8num_ton).toFixed(2)} TON`;
+        }
+        if (data.price_8num_USDT != null) {
+            document.getElementById('shardify-usd').textContent = `${parseFloat(data.price_8num_USDT).toFixed(2)} USD`;
+        }
+        if (data.price_getgems_ton != null) {
+            document.getElementById('getgems-ton').textContent = `${parseFloat(data.price_getgems_ton).toFixed(2)} TON`;
+        }
+        if (data.price_getgems_USDT != null) {
+            document.getElementById('getgems-usd').textContent = `${parseFloat(data.price_getgems_USDT).toFixed(2)} USD`;
+        }
+        if (data.price_fragment_ton != null) {
+            document.getElementById('fragment-ton').textContent = `${parseFloat(data.price_fragment_ton).toFixed(2)} TON`;
+        }
+        if (data.price_fragment_USDT != null) {
+            document.getElementById('fragment-usd').textContent = `${parseFloat(data.price_fragment_USDT).toFixed(2)} USD`;
+        }
 
-        // Update links with fetched data
-        document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.link_getgems);
-        document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.link_fragment);
+        // Update links if present in the data
+        if (data.link_getgems) {
+            document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.link_getgems);
+        }
+        if (data.link_fragment) {
+            document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.link_fragment);
+        }
 
-        document.getElementById('fragment-ton').textContent = `${parseFloat(data.price_fragment_ton).toFixed(2)} TON`;
-        document.getElementById('fragment-usd').textContent = `${parseFloat(data.price_fragment_USDT).toFixed(2)} USD`;
-
-        // Save current data as previous data for next comparison
+        // Save the current data for comparison on the next fetch
         previousData = data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
@@ -58,8 +86,8 @@ function animateChange(element) {
 
 // Initialize and set interval for updates
 window.onload = () => {
-    fetchPrices();
-    setInterval(fetchPrices, 10000);
+    fetchPrices(); // Initial fetch
+    setInterval(fetchPrices, 10000); // Update every 10 seconds
 };
 
 // Script for modal window, update button, and manual data fetch
