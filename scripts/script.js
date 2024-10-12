@@ -17,8 +17,7 @@ showLoading();
 async function fetchPrices() {
     try {
         const response = await fetch(
-            'https://api.allorigins.win/get?url=' +
-            encodeURIComponent('http://92.118.8.202:8888/api/data')
+            `https://api.allorigins.win/get?url=${encodeURIComponent('http://92.118.8.202:8888/api/data')}&_=${new Date().getTime()}`
         );
 
         if (!response.ok) {
