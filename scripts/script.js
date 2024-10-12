@@ -28,7 +28,22 @@ async function fetchPrices() {
         const { contents } = await response.json();
         const data = JSON.parse(contents);
 
-        // Check if data fields are available and apply animations only if values changed
+        // Извлекаем и форматируем дату обновления
+        if (data.last_update) {
+            const lastUpdateUTC = new Date(
+                new Date(data.last_update).getTime() - 3 * 60 * 60 * 1000 // Перевод в UTC
+            );
+
+            // Форматируем дату
+            const formattedDate = lastUpdateUTC.toISOString()
+                .replace("T", " ")
+                .replace(/\..+/, "");
+
+            // Обновляем элемент с датой на странице
+            document.getElementById('last-update').textContent = `Last Update: ${formattedDate} (UTC)`;
+        }
+
+        // Проверка на изменение данных и анимация
         if (previousData) {
             if (previousData.price_8num_ton !== data.price_8num_ton) {
                 animateChange(document.getElementById('shardify-line'));
@@ -41,7 +56,7 @@ async function fetchPrices() {
             }
         }
 
-        // Update price elements only if the fields are present
+        // Обновляем цены, если данные присутствуют
         if (data.price_8num_ton != null) {
             document.getElementById('shardify-ton').textContent = `${parseFloat(data.price_8num_ton).toFixed(2)} TON`;
         }
@@ -61,7 +76,7 @@ async function fetchPrices() {
             document.getElementById('fragment-usd').textContent = `${parseFloat(data.price_fragment_USDT).toFixed(2)} USD`;
         }
 
-        // Update links if present in the data
+        // Обновляем ссылки, если они присутствуют
         if (data.link_getgems) {
             document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.link_getgems);
         }
@@ -69,7 +84,7 @@ async function fetchPrices() {
             document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.link_fragment);
         }
 
-        // Save the current data for comparison on the next fetch
+        // Сохраняем текущие данные для последующих сравнений
         previousData = data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
@@ -87,7 +102,7 @@ function animateChange(element) {
 // Initialize and set interval for updates
 window.onload = () => {
     fetchPrices(); // Initial fetch
-    setInterval(fetchPrices, 10000); // Update every 10 seconds
+    setInterval(fetchPrices, 60000); // Update every 10 seconds
 };
 
 // Script for modal window, update button, and manual data fetch

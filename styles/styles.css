@@ -360,6 +360,14 @@ hr {
     animation: fadeIn 1s ease-in-out;
 }
 
+.last-update {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #FDF6E0;
+    animation: fadeIn 1s ease-in-out;
+}
+
 /* Responsive styles */
 @media (max-width: 600px) {
     .center-rectangle {
@@ -389,7 +397,7 @@ hr {
     }
 
     .text {
-        font-size: 1.0rem;
+        font-size: 0.95rem;
         margin-right: auto;
     }
 
@@ -405,7 +413,7 @@ hr {
     }
 
     .price {
-        font-size: 1.0rem;
+        font-size: 0.85rem;
         color: #FDF6E0;
         margin-right: 5px;
         text-align: right;
@@ -422,7 +430,7 @@ hr {
         height: 40px;
         line-height: 40px;
         border-radius: 10px;
-        font-size: 80%;
+        font-size: 70%;
     }
 
     .logo {
@@ -441,5 +449,13 @@ hr {
         padding: 10px 15px;
         text-align: center;
 
+    }
+
+    .last-update {
+        text-align: center;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        color: #FDF6E0;
+        animation: fadeIn 1s ease-in-out;
     }
 }
