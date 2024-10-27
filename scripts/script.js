@@ -9,6 +9,10 @@ function showLoading() {
     document.getElementById('getgems-usd').textContent = 'Loading...';
     document.getElementById('fragment-ton').textContent = 'Loading...';
     document.getElementById('fragment-usd').textContent = 'Loading...';
+    document.getElementById('xrare-ton').textContent = 'Loading...';
+    document.getElementById('xrare-usd').textContent = 'Loading...';
+    document.getElementById('marketapp-ton').textContent = 'Loading...';
+    document.getElementById('marketapp-usd').textContent = 'Loading...';
 }
 
 // Call showLoading on page load
@@ -27,63 +31,85 @@ async function fetchPrices() {
         const { contents } = await response.json();
         const data = JSON.parse(contents);
 
-        // Извлекаем и форматируем дату обновления
-        if (data.last_update) {
+        // Extract and format the last update date
+        if (data.general && data.general.last_update) {
             const lastUpdateUTC = new Date(
-                new Date(data.last_update).getTime() - 3 * 60 * 60 * 1000 // Перевод в UTC
+                new Date(data.general.last_update).getTime() - 3 * 60 * 60 * 1000 // Convert to UTC
             );
 
-            // Форматируем дату
             const formattedDate = lastUpdateUTC.toISOString()
                 .replace("T", " ")
                 .replace(/\..+/, "");
 
-            // Обновляем элемент с датой на странице
             document.getElementById('last-update').textContent = `Last Update: ${formattedDate} (UTC)`;
         }
 
-        // Проверка на изменение данных и анимация
+        // Check for data changes and animate if necessary
         if (previousData) {
-            if (previousData.price_8num_ton !== data.price_8num_ton) {
+            if (previousData.shardify.price_ton !== data.shardify.price_ton) {
                 animateChange(document.getElementById('shardify-line'));
             }
-            if (previousData.price_getgems_ton !== data.price_getgems_ton) {
+            if (previousData.getgems.price_ton !== data.getgems.price_ton) {
                 animateChange(document.getElementById('getgems-line'));
             }
-            if (previousData.price_fragment_ton !== data.price_fragment_ton) {
+            if (previousData.fragment.price_ton !== data.fragment.price_ton) {
                 animateChange(document.getElementById('fragment-line'));
+            }
+            if (previousData.xrare.price_ton !== data.xrare.price_ton) {
+                animateChange(document.getElementById('xrare-line'));
+            }
+            if (previousData.marketapp.price_ton !== data.marketapp.price_ton) {
+                animateChange(document.getElementById('marketapp-line'));
             }
         }
 
-        // Обновляем цены, если данные присутствуют
-        if (data.price_8num_ton != null) {
-            document.getElementById('shardify-ton').textContent = `${parseFloat(data.price_8num_ton).toFixed(2)} TON`;
+        // Update prices if data is available for each service
+        if (data.shardify && data.shardify.price_ton != null) {
+            document.getElementById('shardify-ton').textContent = `${parseFloat(data.shardify.price_ton).toFixed(2)} TON`;
         }
-        if (data.price_8num_USDT != null) {
-            document.getElementById('shardify-usd').textContent = `${parseFloat(data.price_8num_USDT).toFixed(2)} USD`;
+        if (data.shardify && data.shardify.price_usdt != null) {
+            document.getElementById('shardify-usd').textContent = `${parseFloat(data.shardify.price_usdt).toFixed(2)} USD`;
         }
-        if (data.price_getgems_ton != null) {
-            document.getElementById('getgems-ton').textContent = `${parseFloat(data.price_getgems_ton).toFixed(2)} TON`;
+        if (data.getgems && data.getgems.price_ton != null) {
+            document.getElementById('getgems-ton').textContent = `${parseFloat(data.getgems.price_ton).toFixed(2)} TON`;
         }
-        if (data.price_getgems_USDT != null) {
-            document.getElementById('getgems-usd').textContent = `${parseFloat(data.price_getgems_USDT).toFixed(2)} USD`;
+        if (data.getgems && data.getgems.price_usdt != null) {
+            document.getElementById('getgems-usd').textContent = `${parseFloat(data.getgems.price_usdt).toFixed(2)} USD`;
         }
-        if (data.price_fragment_ton != null) {
-            document.getElementById('fragment-ton').textContent = `${parseFloat(data.price_fragment_ton).toFixed(2)} TON`;
+        if (data.fragment && data.fragment.price_ton != null) {
+            document.getElementById('fragment-ton').textContent = `${parseFloat(data.fragment.price_ton).toFixed(2)} TON`;
         }
-        if (data.price_fragment_USDT != null) {
-            document.getElementById('fragment-usd').textContent = `${parseFloat(data.price_fragment_USDT).toFixed(2)} USD`;
+        if (data.fragment && data.fragment.price_usdt != null) {
+            document.getElementById('fragment-usd').textContent = `${parseFloat(data.fragment.price_usdt).toFixed(2)} USD`;
+        }
+        if (data.xrare && data.xrare.price_ton != null) {
+            document.getElementById('xrare-ton').textContent = `${parseFloat(data.xrare.price_ton).toFixed(2)} TON`;
+        }
+        if (data.xrare && data.xrare.price_usdt != null) {
+            document.getElementById('xrare-usd').textContent = `${parseFloat(data.xrare.price_usdt).toFixed(2)} USD`;
+        }
+        if (data.marketapp && data.marketapp.price_ton != null) {
+            document.getElementById('marketapp-ton').textContent = `${parseFloat(data.marketapp.price_ton).toFixed(2)} TON`;
+        }
+        if (data.marketapp && data.marketapp.price_usdt != null) {
+            document.getElementById('marketapp-usd').textContent = `${parseFloat(data.marketapp.price_usdt).toFixed(2)} USD`;
         }
 
-        // Обновляем ссылки, если они присутствуют
-        if (data.link_getgems) {
-            document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.link_getgems);
+        // Update links if present in the data
+        if (data.getgems && data.getgems.link) {
+            document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.getgems.link);
         }
-        if (data.link_fragment) {
-            document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.link_fragment);
+        if (data.fragment && data.fragment.link) {
+            document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.fragment.link);
+        }
+        if (data.xrare && data.xrare.link) {
+            document.querySelectorAll('.link_wrapper a')[3].setAttribute('href', data.xrare.link);
+        }
+        if (data.marketapp && data.marketapp.link) {
+            document.querySelectorAll('.link_wrapper a')[4].setAttribute('href', data.marketapp.link);
         }
 
-        // Сохраняем текущие данные для последующих сравнений
+        // Save current data for subsequent comparisons
         previousData = data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
@@ -101,7 +127,7 @@ function animateChange(element) {
 // Initialize and set interval for updates
 window.onload = () => {
     fetchPrices(); // Initial fetch
-    setInterval(fetchPrices, 60000); // Update every 10 seconds
+    setInterval(fetchPrices, 60000); // Update every 60 seconds
 };
 
 // Script for modal window, update button, and manual data fetch

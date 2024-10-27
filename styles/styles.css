@@ -16,7 +16,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    height: 100%;
+    overflow: auto;
     /* Prevent scrollbars */
 }
 
@@ -84,6 +85,7 @@ header {
 .logo {
     height: 40px;
     animation: fadeIn 1s ease-in-out;
+    margin-top: 10px;
 }
 
 /* Navigation links */
@@ -112,8 +114,7 @@ header {
 /* Main heading */
 .main-heading {
     text-align: center;
-    margin-bottom: 50px;
-    /* Space above the rectangle */
+    margin: 100px 100px 0px 100px;
     color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
 }
@@ -126,6 +127,7 @@ header {
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin: 50px;
     text-align: left;
     width: 500px;
     max-width: 90%;
@@ -173,7 +175,7 @@ header {
 
 .icon {
     height: 20px;
-    margin-right: 10px;
+    margin-right: 20px;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -330,7 +332,7 @@ hr {
 
 /* Footer text styles */
 .footer-text {
-    position: absolute;
+    position: relative;
     bottom: 10px;
     text-align: center;
     width: 100%;
@@ -338,6 +340,8 @@ hr {
     justify-content: center;
     align-items: center;
     animation: fadeIn 1s ease-in-out;
+    margin-bottom: 10px;
+    margin-top: auto;
 }
 
 .footer-text p {
@@ -373,6 +377,7 @@ hr {
     .center-rectangle {
         width: 90%;
         padding: 20px;
+        margin: 20px 0px 30px 0px;
     }
 
     .center-rectangle h2,
@@ -381,13 +386,14 @@ hr {
     .text,
     .price,
     .label {
-        font-size: 105%;
+        font-size: 100%;
     }
 
     .main-heading {
-        font-size: 1.0rem;
-        margin-bottom: 50px;
+        font-size: 0.85rem;
+        margin: 100px 50px 00px 50px;
         text-align: center;
+
     }
 
     .line {
@@ -397,7 +403,7 @@ hr {
     }
 
     .text {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         margin-right: auto;
     }
 
@@ -413,7 +419,7 @@ hr {
     }
 
     .price {
-        font-size: 0.85rem;
+        font-size: 0.70rem;
         color: #FDF6E0;
         margin-right: 5px;
         text-align: right;
@@ -435,6 +441,7 @@ hr {
 
     .logo {
         height: 30px;
+        
     }
 
     .link-container a,
