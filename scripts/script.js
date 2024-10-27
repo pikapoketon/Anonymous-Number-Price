@@ -143,7 +143,7 @@ async function fetchPrices() {
                 platform.element.getBoundingClientRect();
 
                 // Animate to the new position
-                platform.element.style.transition = 'transform 0.5s';
+                platform.element.style.transition = 'transform 1.0s';
                 platform.element.style.transform = '';
             });
 
