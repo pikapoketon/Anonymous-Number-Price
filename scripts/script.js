@@ -77,17 +77,20 @@ async function fetchPrices() {
         }
 
         // Update links if present in the data
+        if (data.shardify && data.shardify.link) {
+            document.getElementById('shardify-link').setAttribute('href', data.shardify.link);
+        }
         if (data.getgems && data.getgems.link) {
-            document.querySelectorAll('.link_wrapper a')[1].setAttribute('href', data.getgems.link);
+            document.getElementById('getgems-link').setAttribute('href', data.getgems.link);
         }
         if (data.fragment && data.fragment.link) {
-            document.querySelectorAll('.link_wrapper a')[2].setAttribute('href', data.fragment.link);
+            document.getElementById('fragment-link').setAttribute('href', data.fragment.link);
         }
         if (data.xrare && data.xrare.link) {
-            document.querySelectorAll('.link_wrapper a')[3].setAttribute('href', data.xrare.link);
+            document.getElementById('xrare-link').setAttribute('href', data.xrare.link);
         }
         if (data.marketapp && data.marketapp.link) {
-            document.querySelectorAll('.link_wrapper a')[4].setAttribute('href', data.marketapp.link);
+            document.getElementById('marketapp-link').setAttribute('href', data.marketapp.link);
         }
 
         // Now, reorder the platform blocks based on price
@@ -159,7 +162,6 @@ async function fetchPrices() {
         console.error('There has been a problem with your fetch operation:', error);
     }
 }
-
 
 // Initialize and set interval for updates
 window.onload = () => {
