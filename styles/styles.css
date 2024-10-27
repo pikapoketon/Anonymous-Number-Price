@@ -44,24 +44,6 @@ body {
     }
 }
 
-/* Animation for line change */
-.line-change {
-    animation: growAndShrink 0.5s ease-in-out;
-}
-
-@keyframes growAndShrink {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
 
 /* Header styles */
 header {
@@ -158,19 +140,40 @@ header {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Individual line styles */
+
+#platform-container {
+    position: relative;
+}
+
+
 .line {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 15px 0;
     padding: 15px;
-    background-color: #222425;
-    /* New background color for each line */
+    background-color: #2C2F33;
     border-radius: 10px;
-    /* Rounded corners */
     color: #FDF6E0;
     animation: fadeIn 1s ease-in-out;
+    position: relative;
+    will-change: transform;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.line:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: -8px;
+    height: 3px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.line:last-child {
+    border-bottom: none;
 }
 
 .icon {
@@ -257,14 +260,6 @@ header {
     color: #FDF6E0;
 }
 
-/* Separators */
-hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 15px 0;
-    color: #FDF6E0;
-    animation: fadeIn 1s ease-in-out;
-}
 
 /* Modal styles */
 .modal {
@@ -466,4 +461,3 @@ hr {
         animation: fadeIn 1s ease-in-out;
     }
 }
-

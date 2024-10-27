@@ -44,25 +44,6 @@ async function fetchPrices() {
             document.getElementById('last-update').textContent = `Last Update: ${formattedDate} (UTC)`;
         }
 
-        // Check for data changes and animate if necessary
-        if (previousData) {
-            if (previousData.shardify.price_ton !== data.shardify.price_ton) {
-                animateChange(document.getElementById('shardify-line'));
-            }
-            if (previousData.getgems.price_ton !== data.getgems.price_ton) {
-                animateChange(document.getElementById('getgems-line'));
-            }
-            if (previousData.fragment.price_ton !== data.fragment.price_ton) {
-                animateChange(document.getElementById('fragment-line'));
-            }
-            if (previousData.xrare.price_ton !== data.xrare.price_ton) {
-                animateChange(document.getElementById('xrare-line'));
-            }
-            if (previousData.marketapp.price_ton !== data.marketapp.price_ton) {
-                animateChange(document.getElementById('marketapp-line'));
-            }
-        }
-
         // Update prices if data is available for each service
         if (data.shardify && data.shardify.price_ton != null) {
             document.getElementById('shardify-ton').textContent = `${parseFloat(data.shardify.price_ton).toFixed(2)} TON`;
@@ -109,6 +90,69 @@ async function fetchPrices() {
             document.querySelectorAll('.link_wrapper a')[4].setAttribute('href', data.marketapp.link);
         }
 
+        // Now, reorder the platform blocks based on price
+        const parent = document.getElementById('platform-container');
+
+        let platforms = [
+            { id: 'shardify', element: document.getElementById('shardify-line'), price: parseFloat(data.shardify.price_ton) || Infinity },
+            { id: 'getgems', element: document.getElementById('getgems-line'), price: parseFloat(data.getgems.price_ton) || Infinity },
+            { id: 'fragment', element: document.getElementById('fragment-line'), price: parseFloat(data.fragment.price_ton) || Infinity },
+            { id: 'xrare', element: document.getElementById('xrare-line'), price: parseFloat(data.xrare.price_ton) || Infinity },
+            { id: 'marketapp', element: document.getElementById('marketapp-line'), price: parseFloat(data.marketapp.price_ton) || Infinity }
+        ];
+
+        // Record the initial positions
+        const positions = new Map();
+        platforms.forEach(platform => {
+            const rect = platform.element.getBoundingClientRect();
+            positions.set(platform.id, rect);
+        });
+
+        // Sort the platforms based on price
+        platforms.sort((a, b) => a.price - b.price);
+
+        // Check if the order has changed
+        let orderChanged = false;
+        const currentOrder = Array.from(parent.children).map(child => child.id);
+        const newOrder = platforms.map(p => p.element.id);
+        if (currentOrder.join('') !== newOrder.join('')) {
+            orderChanged = true;
+        }
+
+        // Re-append the elements in the new order
+        platforms.forEach(platform => {
+            parent.appendChild(platform.element);
+        });
+
+        if (orderChanged) {
+            // Record the new positions
+            platforms.forEach(platform => {
+                const oldRect = positions.get(platform.id);
+                const newRect = platform.element.getBoundingClientRect();
+
+                const deltaY = oldRect.top - newRect.top;
+
+                // Apply transform to move element back to old position
+                platform.element.style.transition = 'none';
+                platform.element.style.transform = `translateY(${deltaY}px)`;
+
+                // Force reflow
+                platform.element.getBoundingClientRect();
+
+                // Animate to the new position
+                platform.element.style.transition = 'transform 0.5s';
+                platform.element.style.transform = '';
+            });
+
+            // Clean up after animation
+            setTimeout(() => {
+                platforms.forEach(platform => {
+                    platform.element.style.transition = '';
+                    platform.element.style.transform = '';
+                });
+            }, 500);
+        }
+
         // Save current data for subsequent comparisons
         previousData = data;
     } catch (error) {
@@ -116,13 +160,6 @@ async function fetchPrices() {
     }
 }
 
-// Function to animate the change
-function animateChange(element) {
-    element.classList.add('line-change');
-    setTimeout(() => {
-        element.classList.remove('line-change');
-    }, 500); // Duration of the animation in milliseconds
-}
 
 // Initialize and set interval for updates
 window.onload = () => {
@@ -176,4 +213,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
