@@ -11,8 +11,6 @@ function showLoading() {
     document.getElementById('fragment-usd').textContent = 'Loading...';
     document.getElementById('xrare-ton').textContent = 'Loading...';
     document.getElementById('xrare-usd').textContent = 'Loading...';
-    document.getElementById('marketapp-ton').textContent = 'Loading...';
-    document.getElementById('marketapp-usd').textContent = 'Loading...';
 }
 
 // Call showLoading on page load
@@ -69,12 +67,6 @@ async function fetchPrices() {
         if (data.xrare && data.xrare.price_usdt != null) {
             document.getElementById('xrare-usd').textContent = `${parseFloat(data.xrare.price_usdt).toFixed(2)} USD`;
         }
-        if (data.marketapp && data.marketapp.price_ton != null) {
-            document.getElementById('marketapp-ton').textContent = `${parseFloat(data.marketapp.price_ton).toFixed(2)} TON`;
-        }
-        if (data.marketapp && data.marketapp.price_usdt != null) {
-            document.getElementById('marketapp-usd').textContent = `${parseFloat(data.marketapp.price_usdt).toFixed(2)} USD`;
-        }
 
         // Update links if present in the data
         if (data.shardify && data.shardify.link) {
@@ -89,9 +81,6 @@ async function fetchPrices() {
         if (data.xrare && data.xrare.link) {
             document.getElementById('xrare-link').setAttribute('href', data.xrare.link);
         }
-        if (data.marketapp && data.marketapp.link) {
-            document.getElementById('marketapp-link').setAttribute('href', data.marketapp.link);
-        }
 
         // Now, reorder the platform blocks based on price
         const parent = document.getElementById('platform-container');
@@ -100,8 +89,7 @@ async function fetchPrices() {
             { id: 'shardify', element: document.getElementById('shardify-line'), price: parseFloat(data.shardify.price_ton) || Infinity },
             { id: 'getgems', element: document.getElementById('getgems-line'), price: parseFloat(data.getgems.price_ton) || Infinity },
             { id: 'fragment', element: document.getElementById('fragment-line'), price: parseFloat(data.fragment.price_ton) || Infinity },
-            { id: 'xrare', element: document.getElementById('xrare-line'), price: parseFloat(data.xrare.price_ton) || Infinity },
-            { id: 'marketapp', element: document.getElementById('marketapp-line'), price: parseFloat(data.marketapp.price_ton) || Infinity }
+            { id: 'xrare', element: document.getElementById('xrare-line'), price: parseFloat(data.xrare.price_ton) || Infinity }
         ];
 
         // Record the initial positions
@@ -168,50 +156,3 @@ window.onload = () => {
     fetchPrices(); // Initial fetch
     setInterval(fetchPrices, 60000); // Update every 60 seconds
 };
-
-// Script for modal window, update button, and manual data fetch
-document.addEventListener('DOMContentLoaded', () => {
-    const questionIcon = document.getElementById('questionIcon');
-    const updateIcon = document.getElementById('updateIcon');
-    const helpModal = document.getElementById('helpModal');
-    const closeButton = document.getElementById('closeButton');
-    const messageContainer = document.createElement('div'); // Container for the message
-    messageContainer.className = 'message-container';
-    document.body.appendChild(messageContainer);
-
-    questionIcon.addEventListener('click', () => {
-        helpModal.style.display = 'block';
-    });
-
-    updateIcon.addEventListener('click', async () => {
-        // Add visual indication (e.g., animation or style change)
-        updateIcon.classList.add('active');
-
-        // Fetch prices manually
-        await fetchPrices();
-
-        // Remove visual indication after 200ms
-        setTimeout(() => {
-            updateIcon.classList.remove('active');
-        }, 200);
-
-        // Show confirmation message
-        messageContainer.textContent = 'Current price received';
-        messageContainer.classList.add('show');
-
-        // Hide the message after 2 seconds
-        setTimeout(() => {
-            messageContainer.classList.remove('show');
-        }, 2000);
-    });
-
-    closeButton.addEventListener('click', () => {
-        helpModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === helpModal) {
-            helpModal.style.display = 'none';
-        }
-    });
-});
